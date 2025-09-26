@@ -17,7 +17,7 @@ This system provides a complete solution for property management with multi-tena
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone [<multitenant>](https://github.com/tusharkhan/multitenant)
    cd multitanant
    ```
 
