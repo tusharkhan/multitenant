@@ -4,6 +4,7 @@ namespace App\Http\Controllers\HouseOwner;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Building;
 use App\Models\Flat;
 use App\Models\BillCategory;
@@ -15,7 +16,7 @@ class HouseOwnerController extends Controller
         $this->middleware('auth');
         $this->middleware('tenant.scope');
         $this->middleware(function ($request, $next) {
-            if (!auth()->user()->isHouseOwner()) {
+            if (!Auth::user()->isHouseOwner()) {
                 abort(403, 'Access denied. House Owner only.');
             }
             return $next($request);
@@ -25,7 +26,7 @@ class HouseOwnerController extends Controller
     // Building Management
     public function buildings()
     {
-        $buildings = auth()->user()->buildings()->with(['flats'])->paginate(10);
+        $buildings = Auth::user()->buildings()->with(['flats'])->paginate(10);
         return view('house_owner.buildings.index', compact('buildings'));
     }
 
@@ -45,8 +46,8 @@ class HouseOwnerController extends Controller
             'description' => 'nullable|string',
         ]);
 
-        $validated['owner_id'] = auth()->id();
-        $validated['tenant_id'] = auth()->user()->tenant_id;
+        $validated['owner_id'] = Auth::id();
+        $validated['tenant_id'] = Auth::user()->tenant_id;
 
         $building = Building::create($validated);
 
@@ -109,7 +110,7 @@ class HouseOwnerController extends Controller
         }
 
         $validated['building_id'] = $building->id;
-        $validated['tenant_id'] = auth()->user()->tenant_id;
+        $validated['tenant_id'] = Auth::user()->tenant_id;
 
         Flat::create($validated);
 
@@ -159,7 +160,7 @@ class HouseOwnerController extends Controller
 
     public function billCategories()
     {
-        $billCategories = BillCategory::where('tenant_id', auth()->user()->tenant_id)
+        $billCategories = BillCategory::where('tenant_id', Auth::user()->tenant_id)
             ->withCount('bills')
             ->withSum('bills', 'total_amount')
             ->get();
@@ -180,13 +181,13 @@ class HouseOwnerController extends Controller
             'is_active' => 'boolean',
         ]);
 
-        if (BillCategory::where('tenant_id', auth()->user()->tenant_id)
+        if (BillCategory::where('tenant_id', Auth::user()->tenant_id)
                        ->where('name', $validated['name'])
                        ->exists()) {
             return back()->withErrors(['name' => 'Bill category already exists.']);
         }
 
-        $validated['tenant_id'] = auth()->user()->tenant_id;
+        $validated['tenant_id'] = Auth::user()->tenant_id;
         $validated['is_active'] = $request->has('is_active');
 
         BillCategory::create($validated);
@@ -197,7 +198,7 @@ class HouseOwnerController extends Controller
 
     public function editBillCategory(BillCategory $billCategory)
     {
-        if ($billCategory->tenant_id !== auth()->user()->tenant_id) {
+        if ($billCategory->tenant_id !== Auth::user()->tenant_id) {
             abort(403);
         }
 
@@ -206,7 +207,7 @@ class HouseOwnerController extends Controller
 
     public function updateBillCategory(Request $request, BillCategory $billCategory)
     {
-        if ($billCategory->tenant_id !== auth()->user()->tenant_id) {
+        if ($billCategory->tenant_id !== Auth::user()->tenant_id) {
             abort(403);
         }
 
@@ -216,7 +217,7 @@ class HouseOwnerController extends Controller
             'is_active' => 'boolean',
         ]);
 
-        if (BillCategory::where('tenant_id', auth()->user()->tenant_id)
+        if (BillCategory::where('tenant_id', Auth::user()->tenant_id)
                        ->where('name', $validated['name'])
                        ->where('id', '!=', $billCategory->id)
                        ->exists()) {
@@ -233,7 +234,7 @@ class HouseOwnerController extends Controller
     public function toggleBillCategoryStatus(BillCategory $billCategory)
     {
         
-        if ($billCategory->tenant_id !== auth()->user()->tenant_id) {
+        if ($billCategory->tenant_id !== Auth::user()->tenant_id) {
             abort(403);
         }
 
@@ -247,7 +248,7 @@ class HouseOwnerController extends Controller
 
     public function destroyBillCategory(BillCategory $billCategory)
     {
-        if ($billCategory->tenant_id !== auth()->user()->tenant_id) {
+        if ($billCategory->tenant_id !== Auth::user()->tenant_id) {
             abort(403);
         }
 
@@ -263,7 +264,7 @@ class HouseOwnerController extends Controller
 
     private function createDefaultBillCategories()
     {
-        if (BillCategory::where('tenant_id', auth()->user()->tenant_id)->exists()) {
+        if (BillCategory::where('tenant_id', Auth::user()->tenant_id)->exists()) {
             return;
         }
 
@@ -277,7 +278,7 @@ class HouseOwnerController extends Controller
         foreach ($defaultCategories as $categoryName) {
             BillCategory::create([
                 'name' => $categoryName,
-                'tenant_id' => auth()->user()->tenant_id,
+                'tenant_id' => Auth::user()->tenant_id,
                 'is_active' => true,
             ]);
         }
