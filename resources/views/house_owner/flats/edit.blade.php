@@ -242,7 +242,7 @@
                         </div>
                         <div class="col-md-6">
                             <strong>Move In:</strong> {{ $flat->currentTenant->move_in_date ? $flat->currentTenant->move_in_date->format('M d, Y') : 'Not set' }}<br>
-                            <strong>Security Deposit:</strong> ₹{{ number_format($flat->currentTenant->security_deposit ?? 0, 2) }}<br>
+                            <strong>Security Deposit:</strong> ৳{{ number_format($flat->currentTenant->security_deposit ?? 0, 2) }}<br>
                             <strong>Status:</strong> <span class="badge bg-success">Active</span>
                         </div>
                     </div>

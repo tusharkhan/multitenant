@@ -160,11 +160,11 @@
                                                 <span class="badge bg-info">{{ $bill->billCategory->name }}</span>
                                             </td>
                                             <td>{{ $bill->bill_month }}</td>
-                                            <td>₹{{ number_format($bill->amount, 2) }}</td>
+                                            <td>৳{{ number_format($bill->amount, 2) }}</td>
                                             <td>
-                                                <strong>₹{{ number_format($bill->total_amount, 2) }}</strong>
+                                                <strong>৳{{ number_format($bill->total_amount, 2) }}</strong>
                                                 @if($bill->previous_due > 0)
-                                                    <br><small class="text-danger">Prev Due: ₹{{ number_format($bill->previous_due, 2) }}</small>
+                                                    <br><small class="text-danger">Prev Due: ৳{{ number_format($bill->previous_due, 2) }}</small>
                                                 @endif
                                             </td>
                                             <td>
@@ -250,17 +250,17 @@
                                                         </div>
                                                         <div class="row mb-2">
                                                             <div class="col-sm-4"><strong>Amount:</strong></div>
-                                                            <div class="col-sm-8">₹{{ number_format($bill->amount, 2) }}</div>
+                                                            <div class="col-sm-8">৳{{ number_format($bill->amount, 2) }}</div>
                                                         </div>
                                                         @if($bill->previous_due > 0)
                                                         <div class="row mb-2">
                                                             <div class="col-sm-4"><strong>Previous Due:</strong></div>
-                                                            <div class="col-sm-8">₹{{ number_format($bill->previous_due, 2) }}</div>
+                                                            <div class="col-sm-8">৳{{ number_format($bill->previous_due, 2) }}</div>
                                                         </div>
                                                         @endif
                                                         <div class="row mb-2">
                                                             <div class="col-sm-4"><strong>Total Amount:</strong></div>
-                                                            <div class="col-sm-8"><strong>₹{{ number_format($bill->total_amount, 2) }}</strong></div>
+                                                            <div class="col-sm-8"><strong>৳{{ number_format($bill->total_amount, 2) }}</strong></div>
                                                         </div>
                                                         <div class="row mb-2">
                                                             <div class="col-sm-4"><strong>Due Date:</strong></div>

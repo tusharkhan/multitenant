@@ -100,7 +100,7 @@
             </div>
             <div class="card-body">
                 <div class="text-center">
-                    <h3 class="text-danger">₹{{ number_format($stats['total_dues'], 2) }}</h3>
+                    <h3 class="text-danger">৳{{ number_format($stats['total_dues'], 2) }}</h3>
                     <p class="text-muted">Amount pending collection</p>
                 </div>
             </div>
@@ -136,7 +136,7 @@
                                 <td>{{ $bill->flat->building->name }}</td>
                                 <td>{{ $bill->flat->flat_number }}</td>
                                 <td>{{ $bill->billCategory->name }}</td>
-                                <td>₹{{ number_format($bill->total_amount, 2) }}</td>
+                                <td>৳{{ number_format($bill->total_amount, 2) }}</td>
                                 <td>
                                     @if($bill->status === 'paid')
                                         <span class="badge bg-success">Paid</span>

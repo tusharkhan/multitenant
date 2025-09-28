@@ -76,7 +76,7 @@
                                         </div>
                                     </div>
                                     <div class="col-6">
-                                        <h5 class="text-success mb-0">₹{{ number_format($category->total_amount ?? 0, 2) }}</h5>
+                                        <h5 class="text-success mb-0">৳{{ number_format($category->total_amount ?? 0, 2) }}</h5>
                                         <small class="text-muted">Total Amount</small>
                                     </div>
                                 </div>
@@ -139,7 +139,7 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <h4 class="text-info mb-0">₹{{ number_format($billCategories->sum('total_amount') ?? 0, 2) }}</h4>
+                                <h4 class="text-info mb-0">৳{{ number_format($billCategories->sum('total_amount') ?? 0, 2) }}</h4>
                                 <small class="text-muted">Total Revenue</small>
                             </div>
                         </div>

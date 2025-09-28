@@ -171,7 +171,7 @@
                                                         </div>
                                                         <div class="row mb-2">
                                                             <div class="col-sm-4"><strong>Security Deposit:</strong></div>
-                                                            <div class="col-sm-8">₹{{ number_format($tenant->security_deposit ?? 0, 2) }}</div>
+                                                            <div class="col-sm-8">৳{{ number_format($tenant->security_deposit ?? 0, 2) }}</div>
                                                         </div>
                                                         <div class="row mb-2">
                                                             <div class="col-sm-4"><strong>Move In Date:</strong></div>

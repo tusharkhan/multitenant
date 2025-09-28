@@ -194,7 +194,7 @@
                                         <small class="text-muted">Vacant Flats</small>
                                     </div>
                                     <div class="col-md-3">
-                                        <h5 class="text-info mb-0" id="totalAmount">₹0</h5>
+                                        <h5 class="text-info mb-0" id="totalAmount">৳0</h5>
                                         <small class="text-muted">Total Amount</small>
                                     </div>
                                 </div>
@@ -285,7 +285,7 @@ function calculateTotalAmount() {
     const occupiedFlats = parseInt(document.getElementById('occupiedFlats').textContent) || 0;
     const totalAmount = amount * occupiedFlats;
     
-    document.getElementById('totalAmount').textContent = '₹' + totalAmount.toLocaleString('en-IN', {
+    document.getElementById('totalAmount').textContent = '৳' + totalAmount.toLocaleString('en-IN', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
     });
@@ -309,7 +309,7 @@ document.getElementById('createBillsBtn').addEventListener('click', function(e) 
     const amount = document.getElementById('amount').value;
     const occupiedFlats = document.getElementById('occupiedFlats').textContent;
     
-    if (!confirm(`Are you sure you want to create bills for ${occupiedFlats} flats in "${selectedBuilding}" with amount ₹${amount} each?`)) {
+    if (!confirm(`Are you sure you want to create bills for ${occupiedFlats} flats in "${selectedBuilding}" with amount ৳${amount} each?`)) {
         e.preventDefault();
     }
 });

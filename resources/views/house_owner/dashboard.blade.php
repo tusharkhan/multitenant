@@ -84,7 +84,7 @@
                 Total Outstanding Dues
             </div>
             <div class="card-body text-center">
-                <h2 class="text-danger">₹{{ number_format($stats['total_dues'], 2) }}</h2>
+                <h2 class="text-danger">৳{{ number_format($stats['total_dues'], 2) }}</h2>
                 <p class="text-muted">Amount pending collection from tenants</p>
             </div>
         </div>
@@ -164,7 +164,7 @@
                                 <td>{{ $bill->formatted_bill_month }}</td>
                                 <td>{{ $bill->flat->flat_number }}</td>
                                 <td>{{ $bill->billCategory->name }}</td>
-                                <td>₹{{ number_format($bill->total_amount, 2) }}</td>
+                                <td>৳{{ number_format($bill->total_amount, 2) }}</td>
                                 <td>
                                     @if($bill->status === 'paid')
                                         <span class="badge bg-success">Paid</span>
